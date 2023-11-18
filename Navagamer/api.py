@@ -28,7 +28,6 @@ def games():
     games_exist = conn.execute('SELECT COUNT(*) FROM games').fetchone()[0] > 0
     
     if not games_exist:
-        # Fetch and store games from Steam
         response = requests.get('https://api.steampowered.com/ISteamApps/GetAppList/v2/')
         steam_games = response.json()['applist']['apps']
         
@@ -41,7 +40,6 @@ def games():
                 conn.execute('INSERT INTO games (name, appid, url, icon_url, source) VALUES (?, ?, ?, ?, ?)',
                              (name, appid, url, icon_url, 'steam'))
 
-        # Fetch and store games from FreeToGame
         response = requests.get('https://www.freetogame.com/api/games')
         free_games = response.json()
         
