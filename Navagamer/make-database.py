@@ -7,7 +7,6 @@ def get_db_connection():
 
 def create_tables():
     conn = get_db_connection()
-    # Include 'reviews' and 'requirements' columns of type TEXT
     conn.execute('''CREATE TABLE IF NOT EXISTS games (
                         appid INTEGER,
                         name TEXT NOT NULL,
